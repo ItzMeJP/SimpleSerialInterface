@@ -1,0 +1,43 @@
+cmake_minimum_required(VERSION 3.19)
+project(simple_serial)
+
+set(CMAKE_CXX_STANDARD 14)
+
+#External packages
+find_package(Boost COMPONENTS date_time system REQUIRED) # To serial communication
+find_package(Threads REQUIRED)
+
+## Specify additional locations of header files
+## Your package locations should be listed before other locations
+include_directories(
+        include
+        ${BOOST_INCLUDE_DIRS}
+)
+
+## Declare a C++ library
+add_library(simple_serial
+        src/simple_serial.cpp)
+
+## Set dependencies of the library
+target_link_libraries(simple_serial
+        ${BOOST_LIBRARIES}
+        ${CMAKE_THREAD_LIBS_INIT}
+        )
+
+## Define an executable
+add_executable(reader_serial_test
+        examples/reader_serial_test.cpp)
+
+## Define an executable
+add_executable(writer_serial_test
+        examples/writer_serial_test.cpp)
+
+## Define the executable dependencies
+target_link_libraries(reader_serial_test
+        simple_serial
+        )
+
+## Define the executable dependencies
+target_link_libraries(writer_serial_test
+        simple_serial
+        )
