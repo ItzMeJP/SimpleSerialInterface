@@ -5,8 +5,11 @@
 #ifndef MIMIC_GRASPING_SERVER_SIMPLE_SERIAL_H
 #define MIMIC_GRASPING_SERVER_SIMPLE_SERIAL_H
 
-#include<boost/asio.hpp>
-//#include<iostream>
+#include <boost/asio.hpp>
+#include <iostream>
+#include <time.h>
+#include <boost/utility.hpp>
+#include <simple_serial/blocking_reader.h>
 
 class SimpleSerial{
 
@@ -19,6 +22,8 @@ public:
     void setConfig(std::string _port, unsigned int _baud_rate);
     void writeString(std::string _s);
     std::string readLine();
+    std::string readLine(float _timeout_in_ms);
+
     unsigned int getBaudRate();
     std::string getPort();
     void setTerminator(std::string _t);

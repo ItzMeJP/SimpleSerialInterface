@@ -27,19 +27,18 @@ void SimpleSerial::setBaudRate(unsigned int _baud_rate) {
 bool SimpleSerial::start(std::string &_error){
 
     try {
-        io_ = std::make_shared<boost::asio::io_service>();
-        serial_ = std::make_shared<boost::asio::serial_port>(*io_, port_);
+        io_.reset(new boost::asio::io_service());
+        serial_.reset(new boost::asio::serial_port(*io_, port_));
         serial_->set_option(boost::asio::serial_port_base::baud_rate(baud_rate_));
 
+        //timer_reset(new boost::asio::deadline_timer(*io_);
     } catch(boost::system::system_error& e)
     {
         _error = e.what();
-        //std::cout<<"Serial Error: "<< e.what() <<std::endl;
         return false;
     }
-
+    _error = "Serial communication established.";
     return true;
-
 }
 
 void SimpleSerial::setConfig(std::string _port, unsigned int _baud_rate){
@@ -70,7 +69,7 @@ std::string SimpleSerial::readLine()
     std::string result;
     for(;;)
     {
-        boost::asio::read(*serial_,boost::asio::buffer(&c,1));
+        boost::asio::read(*serial_,boost::asio::buffer(&c,1)); // TODO: if none msg is transferred it will be stuck
         switch(c)
         {
             case '\r':
@@ -80,5 +79,31 @@ std::string SimpleSerial::readLine()
             default:
                 result+=c;
         }
+
     }
 }
+
+std::string SimpleSerial::readLine(float _timeout_in_ms)// TODO: improve it...
+{
+    blocking_reader reader(io_,serial_, _timeout_in_ms);
+    char c;
+
+    std::string rsp;
+
+    // read from the serial port until we get a
+    // \n or until a read times-out (500ms)
+    while (reader.read_char(c) && c != '\n') {
+        rsp += c;
+
+    }
+
+    if (c != '\n') {
+        // it must have timed out.
+        //std::cout << "Read timed out!" << std::endl;
+        //std::cout << "received " << c << std::endl;
+
+    }
+
+    return rsp;
+}
+

@@ -15,7 +15,7 @@ include_directories(
 )
 
 ## Declare a C++ library
-add_library(simple_serial
+add_library(${PROJECT_NAME}
         src/simple_serial.cpp)
 
 ## Set dependencies of the library
@@ -41,3 +41,4 @@ target_link_libraries(reader_serial_test
 target_link_libraries(writer_serial_test
         simple_serial
         )
+
