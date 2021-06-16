@@ -1,5 +1,9 @@
 cmake_minimum_required(VERSION 3.19)
-project(simple_serial)
+
+project(simple_serial
+        VERSION 16.06.2021
+        DESCRIPTION
+        "Simple serial API to C++")
 
 set(CMAKE_CXX_STANDARD 14)
 
@@ -15,11 +19,16 @@ include_directories(
 )
 
 ## Declare a C++ library
-add_library(${PROJECT_NAME}
+add_library(${PROJECT_NAME} SHARED
         src/simple_serial.cpp)
 
+set_target_properties(${PROJECT_NAME} PROPERTIES
+        VERSION ${PROJECT_VERSION}
+        SOVERSION 0
+        )
+
 ## Set dependencies of the library
-target_link_libraries(simple_serial
+target_link_libraries(${PROJECT_NAME}
         ${BOOST_LIBRARIES}
         ${CMAKE_THREAD_LIBS_INIT}
         )
