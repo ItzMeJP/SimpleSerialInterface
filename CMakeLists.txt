@@ -25,7 +25,7 @@ find_package(Threads REQUIRED)
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
 include_directories(
-        include
+        include/simple_serial
         ${BOOST_INCLUDE_DIRS}
 )
 

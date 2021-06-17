@@ -2,7 +2,7 @@
 // Created by joaopedro on 20/05/21.
 //
 
-#include <simple_serial/simple_serial.h>
+#include <simple_serial.h>
 
 SimpleSerial::SimpleSerial() {
 
