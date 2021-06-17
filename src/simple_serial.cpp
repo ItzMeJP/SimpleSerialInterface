@@ -82,7 +82,7 @@ std::string SimpleSerial::readLine()
 
     }
 }
-
+/*
 std::string SimpleSerial::readLine(float _timeout_in_ms)// TODO: improve it...
 {
     blocking_reader reader(io_,serial_, _timeout_in_ms);
@@ -105,5 +105,6 @@ std::string SimpleSerial::readLine(float _timeout_in_ms)// TODO: improve it...
     }
 
     return rsp;
-}
 
+}
+*/
