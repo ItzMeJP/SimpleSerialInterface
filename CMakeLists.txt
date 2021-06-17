@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.19)
+cmake_minimum_required(VERSION 3.16)
 
 project(simple_serial
         VERSION 17.06.2021
@@ -69,4 +69,3 @@ target_link_libraries(reader_serial_test
 target_link_libraries(writer_serial_test
         simple_serial
         )
-
