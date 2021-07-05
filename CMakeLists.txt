@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.16)
 
 project(simple_serial
-        VERSION 17.06.2021
+        VERSION 05.07.2021
         DESCRIPTION
         "Simple serial API to C++")
 
@@ -45,8 +45,8 @@ target_include_directories(${PROJECT_NAME} PRIVATE .)
 configure_file(simple_serial.pc.in simple_serial.pc @ONLY)
 
 install(TARGETS ${PROJECT_NAME}
-        LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-        PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+        LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}/simple_serial
+        PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/simple_serial)
 
 install(FILES ${CMAKE_BINARY_DIR}/simple_serial.pc
         DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/pkgconfig)
