@@ -66,7 +66,7 @@ void SimpleSerial::setTerminator(std::string _t) {
 bool SimpleSerial::readLine(std::string &_result, std::string& _error)
 {
     char c;
-    _result.clear();
+    std::string r;
     for(;;)
     {
         try {
@@ -81,9 +81,10 @@ bool SimpleSerial::readLine(std::string &_result, std::string& _error)
             case '\r':
                 break;
             case '\n':
+                _result = r;
                 return true;
             default:
-                _result+=c;
+                r+=c;
         }
 
     }

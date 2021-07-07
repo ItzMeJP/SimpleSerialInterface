@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.16)
 
 project(simple_serial
-        VERSION 05.07.2021
+        VERSION 07.07.2021
         DESCRIPTION
         "Simple serial API to C++")
 
