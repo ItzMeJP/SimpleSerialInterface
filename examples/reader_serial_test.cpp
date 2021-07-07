@@ -10,17 +10,19 @@ using namespace boost;
 
 int main(){
 
-    string  error;
+    string error = "", msg="";
 
     SimpleSerial serial;
-    serial.setPort("/dev/ttyUSB0");
+    serial.setPort("/dev/ttyACM0");
     serial.setBaudRate(115200);
 
         if(serial.start(error)) {
-
-            while (true) {
-                cout << "Received : " << serial.readLine() << endl;
+            bool ctrl = serial.readLine(msg, error);
+            while (ctrl) {
+                cout << "Received : " << msg << endl;
+                ctrl = serial.readLine(msg, error);
             }
+            cout<<"Serial Error"<<endl<<error<<endl;
         }
         else
             cout<<"Serial Error"<<endl<<error<<endl;

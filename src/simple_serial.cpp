@@ -63,21 +63,27 @@ void SimpleSerial::setTerminator(std::string _t) {
     terminator_ = _t;
 }
 
-std::string SimpleSerial::readLine()
+bool SimpleSerial::readLine(std::string &_result, std::string& _error)
 {
     char c;
-    std::string result;
+    _result.clear();
     for(;;)
     {
-        boost::asio::read(*serial_,boost::asio::buffer(&c,1)); // TODO: if none msg is transferred it will be stuck
+        try {
+            boost::asio::read(*serial_,boost::asio::buffer(&c,1)); // TODO: if none msg is transferred it will be stuck
+        } catch(boost::system::system_error& e){
+            _error = e.what();
+            return false;
+        }
+
         switch(c)
         {
             case '\r':
                 break;
             case '\n':
-                return result;
+                return true;
             default:
-                result+=c;
+                _result+=c;
         }
 
     }

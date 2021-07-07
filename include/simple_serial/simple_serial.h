@@ -21,7 +21,7 @@ public:
     void setBaudRate(unsigned int _baud_rate);
     void setConfig(std::string _port, unsigned int _baud_rate);
     void writeString(std::string _s);
-    std::string readLine();
+    bool readLine(std::string &_result ,std::string &_error);
     std::string readLine(float _timeout_in_ms);
 
     unsigned int getBaudRate();
