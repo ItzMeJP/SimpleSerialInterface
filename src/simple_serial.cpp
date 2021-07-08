@@ -41,6 +41,19 @@ bool SimpleSerial::start(std::string &_error){
     return true;
 }
 
+bool SimpleSerial::stop(std::string &_error){
+
+    try {
+        serial_->close();
+    } catch(boost::system::system_error& e)
+    {
+        _error = e.what();
+        return false;
+    }
+    _error = "Serial communication closed.";
+    return true;
+}
+
 void SimpleSerial::setConfig(std::string _port, unsigned int _baud_rate){
     setPort(_port);
     setBaudRate(_baud_rate);

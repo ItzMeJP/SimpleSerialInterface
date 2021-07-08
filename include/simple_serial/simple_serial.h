@@ -28,6 +28,7 @@ public:
     std::string getPort();
     void setTerminator(std::string _t);
     bool start(std::string &_error);
+    bool stop(std::string &_error);
 private:
     std::shared_ptr<boost::asio::io_service> io_;
     //boost::asio::io_service io_;
